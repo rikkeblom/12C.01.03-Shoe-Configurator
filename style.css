@@ -1,12 +1,30 @@
-body {
+#flex {
   display: flex;
-  height: 100vh;
   gap: 3rem;
   align-items: center;
   justify-content: center;
+  margin-top: 5rem;
+}
+
+body {
   background-color: #5f5f5f;
 }
 
 svg {
-  height: 20rem;
+  width: 60vw;
+}
+
+section > svg > g:not(#background) path:hover {
+  stroke: black;
+  stroke-width: 3;
+}
+
+.buttonFlex {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+button p {
+  margin: 0.5rem 1rem;
 }

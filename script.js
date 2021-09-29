@@ -3,24 +3,32 @@
 document.addEventListener("DOMContentLoaded", start);
 
 let elementToPaint;
+let colorPicker;
 
 async function start() {
   let resp = await fetch("shoe.svg");
   let svg = await resp.text();
-  document.querySelector("section").innerHTML = svg;
+  document.querySelector("#shoeBox").innerHTML = svg;
 
   manipulateSVG();
 }
 
+function adjustPickerSize() {
+  // let screenWidth = screen.width;
+  let currentWidth = (window.innerWidth / 100) * 20;
+  colorPicker.resize(currentWidth);
+}
+
 function manipulateSVG() {
   console.log("manipulative");
+  window.addEventListener("resize", adjustPickerSize);
 
   selectGroups();
   noClickOnShadows();
 
-  let colorPicker = new iro.ColorPicker("#picker", {
+  colorPicker = iro.ColorPicker("#picker", {
     // Set the size of the color picker
-    width: 250,
+    width: (screen.width / 100) * 20,
     // Set the initial color to pure red
     color: "#f00",
   });
