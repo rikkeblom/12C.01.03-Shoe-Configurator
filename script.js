@@ -54,7 +54,7 @@ function manipulateSVG() {
   function colorEvent(area) {
     // console.log(area.id);
     // console.log(localStorage.getItem(area.id));
-    if (localStorage.getItem(area.id) === "NUL") {
+    if (localStorage.getItem(area.id) === null) {
       area.style.fill = "#f2ecde";
     } else {
       area.style.fill = localStorage.getItem(area.id);
