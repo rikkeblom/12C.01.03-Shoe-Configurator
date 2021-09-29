@@ -9,6 +9,7 @@ async function start() {
   let resp = await fetch("shoe.svg");
   let svg = await resp.text();
   document.querySelector("#shoeBox").innerHTML = svg;
+  document.querySelector("button").addEventListener("click", saveInLocalStorage);
 
   manipulateSVG();
 }
@@ -28,7 +29,7 @@ function manipulateSVG() {
 
   colorPicker = iro.ColorPicker("#picker", {
     // Set the size of the color picker
-    width: (screen.width / 100) * 20,
+    width: (window.innerWidth / 100) * 20,
     // Set the initial color to pure red
     color: "#f00",
   });
@@ -51,8 +52,15 @@ function manipulateSVG() {
   //colorPicker.color.hexString
 
   function colorEvent(area) {
+    // console.log(area.id);
+    // console.log(localStorage.getItem(area.id));
+    if (localStorage.getItem(area.id) === "NUL") {
+      area.style.fill = "#f2ecde";
+    } else {
+      area.style.fill = localStorage.getItem(area.id);
+    }
     area.style.cursor = "pointer";
-    area.style.fill = "#f2ecde";
+
     area.querySelectorAll("path").forEach(removeFill);
     function removeFill(path) {
       path.removeAttribute("fill");
@@ -111,4 +119,21 @@ function selectGroups() {
   document.querySelector("#middlebase").classList.add("g_to_interact_with");
   document.querySelector("#basetop").classList.add("g_to_interact_with");
   document.querySelector("#seemfront").classList.add("g_to_interact_with");
+}
+
+function saveInLocalStorage() {
+  console.log("save");
+
+  //   console.log(document.querySelector("#topheel").style.fill);
+  localStorage.setItem("topheel", document.querySelector("#topheel").style.fill);
+  localStorage.setItem("mainback", document.querySelector("#mainback").style.fill);
+  localStorage.setItem("main", document.querySelector("#main").style.fill);
+  localStorage.setItem("flip", document.querySelector("#flip").style.fill);
+  localStorage.setItem("laces", document.querySelector("#laces").style.fill);
+  localStorage.setItem("snout", document.querySelector("#snout").style.fill);
+  localStorage.setItem("frontendbase", document.querySelector("#frontendbase").style.fill);
+  localStorage.setItem("middlebase", document.querySelector("#middlebase").style.fill);
+  localStorage.setItem("basetop", document.querySelector("#basetop").style.fill);
+  localStorage.setItem("seemfront", document.querySelector("#seemfront").style.fill);
+  localStorage.setItem("topfront", document.querySelector("#topfront").style.fill);
 }
